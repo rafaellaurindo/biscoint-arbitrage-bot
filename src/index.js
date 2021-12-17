@@ -2,6 +2,7 @@ import Biscoint from 'biscoint-api-node';
 import _ from 'lodash';
 import player from 'play-sound';
 import config from './config.js';
+import { sendMessage } from './telegram';
 
 // read the configurations
 let {
@@ -144,6 +145,7 @@ async function tradeCycle() {
 
         handleMessage(`[${tradeCycleCount}] Success, profit: + ${profit.toFixed(3)}% (${finishedAt - startedAt} ms)`);
         play();
+        notify(firstOffer, secondOffer)
       } catch (error) {
         handleMessage(`[${tradeCycleCount}] Error on confirm offer: ${error.error}`, 'error');
         console.error(error);
@@ -232,6 +234,14 @@ const play = () => {
     sound.play('./tone.mp3', (err) => {
       if (err) console.log(`Could not play sound: ${err}`);
     });
+  }
+};
+
+const notify = (firstOffer, secondOffer) => {
+  if (notifyInTelegram) {
+    const satoshisWin = (Number(firstOffer.baseAmount.replace('0.', '')) - Number(secondOffer.baseAmount.replace('0.', '')))
+    const message = `You win ${satoshisWin} satoshis!`;
+    sendMessage(message);
   }
 };
 

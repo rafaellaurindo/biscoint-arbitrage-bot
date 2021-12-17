@@ -14,6 +14,9 @@ const config = {
   playSound: false,
   simulation: false,
   executeMissedSecondLeg: true,
+  notifyInTelegram: false,
+  telegramBotToken: null,
+  telegramChatId: null,
 };
 
 try {

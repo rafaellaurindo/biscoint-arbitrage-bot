@@ -8,5 +8,8 @@
   "intervalSeconds": null,
   "playSound": false,
   "simulation": false,
-  "executeMissedSecondLeg": true
+  "executeMissedSecondLeg": true,
+  "notifyInTelegram": false,
+  "telegramBotToken": "your-telegram-bot-token",
+  "telegramChatId": "your-telegram-chat-id"
 }
